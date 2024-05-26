@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## about auth.js
+
+以下のコマンドを実行し、結果を.env.local に貼り付ける
+
+npx auth secret
+
+ex.)
+AUTH_SECRET=4iho2yeX5bg+VG4p2pIq8Za7UOCv5sO74oEvG7WgZqM=
