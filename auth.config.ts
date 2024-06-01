@@ -11,15 +11,20 @@ export const authConfig: NextAuthConfig = {
       //   password: {},
       // },
       async authorize(credentials, req: Request): Promise<User | null> {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        ///await new Promise((resolve) => setTimeout(resolve, 2000));
 
         const username = credentials.username;
 
         console.log("[authorize] username: " + username);
 
-        return {
-          id: "001",
-        };
+        if (username === "obuchi") {
+          return {
+            id: "001",
+          };
+        } else {
+          console.log("invalid user ...");
+          return null;
+        }
         // return credentials.email === email && credentials.password === "123456"
         //   ? { id: "userId", email }
         //   : null;
