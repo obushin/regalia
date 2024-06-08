@@ -19,7 +19,7 @@ export async function login(
     });
     console.log(url);
 
-    // TODO: next.jsの以下の不具合のため、一旦dashboardを同一レイアウトのフォルダに移動
+    // TODO: next.jsの以下の不具合のため、一旦loginとdashboardのレイアウトを共通のものにする
     //       https://github.com/vercel/next.js/issues/58263
     redirectUrl = "/dashboard";
   } catch (e) {
