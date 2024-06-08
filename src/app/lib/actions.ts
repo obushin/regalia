@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { signIn } from "../../../auth";
 import { redirect } from "next/navigation";
+import { CredentialsSignin } from "next-auth";
 
 export async function login(
   prevState: string | undefined,
@@ -14,7 +15,7 @@ export async function login(
     const url = await signIn("credentials", {
       username: formData.get("username"),
       password: formData.get("password"),
-      redirect: false, // auto redirectに不具合があるため、手動でredirectする
+      redirect: false, // try-catchの中でredirectできないため、手動でredirectする
     });
     console.log(url);
 
@@ -22,15 +23,14 @@ export async function login(
     //       https://github.com/vercel/next.js/issues/58263
     redirectUrl = "/dashboard";
   } catch (e) {
-    console.error(e);
+    if (e instanceof CredentialsSignin) {
+      return "Invalid credentials.";
+    } else {
+      console.error(e);
+      return "Unexpected Error occurred.";
+    }
   }
-  //finally {
-  if (redirectUrl) {
-    console.log("redirect to " + redirectUrl);
-
-    // revalidatePath(redirectUrl);
-    redirect(redirectUrl);
-  } else {
-    return "login failed.";
-  }
+  
+  console.log("Login successful!! redirect to " + redirectUrl);
+  redirect(redirectUrl);  
 }
